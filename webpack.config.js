@@ -19,6 +19,11 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    open: true
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Project Demo',
