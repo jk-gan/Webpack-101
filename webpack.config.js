@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
@@ -27,14 +27,15 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
-    open: true
+    open: true,
+    overlay: true,
+    watchOptions: {
+      ignored: /node_modules/
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Project Demo',
-      // minify: {
-      //   collapseWhitespace: true
-      // },
       hash: true,
       template: './src/index.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),
