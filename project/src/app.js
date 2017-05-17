@@ -6,8 +6,7 @@ import css from './app.scss'
 const App = () => {
   return(
     <div>
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1>Hello, world!</h1>
+      <h1><img src={logo} className="App-logo" alt="logo" />Hello, world!</h1>
     </div>
   )
 }
