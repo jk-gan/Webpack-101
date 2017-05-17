@@ -1,0 +1,17 @@
+{
+  "name": "webpack-101",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack -d --watch",
+    "prod": "webpack -p"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.1",
+    "html-webpack-plugin": "^2.28.0",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.17.0",
+    "webpack": "^2.5.1"
+  }
+}
