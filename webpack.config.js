@@ -1,6 +1,15 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const webpack = require('webpack')
+const path = require('path')
+
+const isProduction = process.env.NODE_ENV === 'production'
+const cssDev = ['style-loader', 'css-loader', 'sass-loader']
+const cssProd = ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: ['css-loader', 'sass-loader']
+                })
+const cssConfig = isProduction ? cssProd : cssDev
 
 module.exports = {
   entry: './src/app.js',
@@ -12,10 +21,7 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        use: cssConfig
       },
       {
         test: /\.js$/,
@@ -28,6 +34,7 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     open: true,
+    hot: true,
     overlay: true,
     watchOptions: {
       ignored: /node_modules/
@@ -37,8 +44,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Project Demo',
       hash: true,
-      template: './src/index.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      template: './src/index.ejs',
     }),
-    new ExtractTextPlugin("app.css"),
+    new ExtractTextPlugin({
+      filename: "app.css",
+      disable: !isProduction
+    }),
+    new webpack.HotModuleReplacementPlugin(), // enable HMR globally
+    new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
   ]
 }
