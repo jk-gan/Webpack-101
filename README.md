@@ -4,7 +4,7 @@
 
 This is my note about setting up [webpack 2](https://webpack.js.org/) for [React](https://facebook.github.io/react/) project
 
-This is the tools I will use to setup my project:
+These are the tools I will use to setup my project:
 - [Node js](https://nodejs.org/en/) (v7.10.0)
 - [Yarn](https://yarnpkg.com/en/) (v0.24.5)
 
