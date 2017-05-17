@@ -1,3 +1,8 @@
-const css = require('./app.scss')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import css from './app.scss'
 
-console.log('Hello from app.js and webpack-dev-server')
+ReactDOM.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('root')
+)
