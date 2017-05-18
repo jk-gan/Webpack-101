@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import logo from './logo.svg'
-import css from './app.scss'
+import css1 from './app.scss'
+import css2 from './abc.css'
 
 const App = () => {
   return(
