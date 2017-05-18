@@ -25,7 +25,7 @@ module.exports = {
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: isProduction ? '[name].bundle.min.js' : '[name].bundle.js'
+    filename: isProduction ? '[name]-[hash].bundle.min.js' : '[name].bundle.js'
   },
   module: {
     rules: [
@@ -34,7 +34,7 @@ module.exports = {
         use: cssConfig
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader'
       },
@@ -44,8 +44,8 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 10000,
-              name: '[name].[ext]',
+              limit: 100,
+              name: isProduction ? '[name]-[hash].[ext]' : '[name].[ext]',
               outputPath: './images/'
             }
           },
@@ -58,7 +58,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: '[name].[ext]',
+            name: isProduction ? '[name]-[hash].[ext]' : '[name].[ext]',
             outputPath: './fonts/'
           }
         }
@@ -78,11 +78,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Project Demo',
-      hash: true,
       template: './src/index.ejs',
     }),
     new ExtractTextPlugin({
-      filename: '[name].min.css',
+      filename: '[name]-[contenthash].min.css',
       disable: !isProduction
     }),
     new webpack.HotModuleReplacementPlugin(), // enable HMR globally
