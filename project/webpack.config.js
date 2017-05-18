@@ -15,7 +15,7 @@ module.exports = {
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js'
+    filename: isProduction ? '[name].bundle.min.js' : '[name].bundle.js'
   },
   module: {
     rules: [
@@ -74,5 +74,6 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(), // enable HMR globally
     new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
-  ]
+  ],
+  devtool: "eval-source-map"
 }
