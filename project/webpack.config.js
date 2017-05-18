@@ -79,7 +79,7 @@ module.exports = {
       template: './src/index.ejs',
     }),
     new ExtractTextPlugin({
-      filename: '[name]-[hash].css',
+      filename: '[name].min.css',
       disable: !isProduction
     }),
     new webpack.HotModuleReplacementPlugin(), // enable HMR globally

@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server",
-    "build": "NODE_ENV='production' webpack -p"
+    "build": "yarn run prebuild && NODE_ENV='production' webpack -p",
+    "prebuild": "rimraf ./dist/*"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.0",
@@ -19,6 +20,7 @@
     "html-webpack-plugin": "^2.28.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.5",
+    "rimraf": "^2.6.1",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
