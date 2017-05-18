@@ -8,26 +8,14 @@ These are the tools I will use to setup my project:
 - [Node js](https://nodejs.org/en/) (v7.10.0)
 - [Yarn](https://yarnpkg.com/en/) (v0.24.5)
 
+## Table of contents
 
-1. Create a new project
-```bash
-mkdir webpack-101
-cd webpack-101
-```
-2. Initialize the project
-```bash
-yarn init
-```
-3. Install Webpack
-```bash
-yarn add -D webpack
-```
-4. In terminal
-```bash
-# for development build
-webpack -d ./src/app.js ./dist/app.bundle.js
-# for production build
-webpack -p ./src/app.js ./dist/app.bundle.js
-```
+[01 - Introduction](./tutorials/01-introduction.md)
+
+[02 - Installation](./tutorials/02-installation.md)
+
+[03 - Webpack Configuration](./tutorials/03-webpack-configuration.md)
+
+[04 - Ready for Production](./tutorials/04-ready-for-production.md)
 
 To be continue...
