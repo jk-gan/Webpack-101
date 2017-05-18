@@ -4,10 +4,20 @@ const webpack = require('webpack')
 const path = require('path')
 
 const isProduction = process.env.NODE_ENV === 'production'
-const cssDev = ['style-loader', 'css-loader', 'sass-loader']
+const cssDev = [
+  { loader: 'style-loader', options: { sourceMap: true } },
+  { loader: 'css-loader', options: { sourceMap: true } },
+  { loader: 'postcss-loader', options: { sourceMap: true } },
+  { loader: 'sass-loader', options: { sourceMap: true } }
+]
+
 const cssProd = ExtractTextPlugin.extract({
                   fallback: 'style-loader',
-                  use: ['css-loader', 'sass-loader']
+                  use: [
+                    { loader: 'css-loader', options: { sourceMap: true } },
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } }
+                  ]
                 })
 const cssConfig = isProduction ? cssProd : cssDev
 
@@ -69,7 +79,7 @@ module.exports = {
       template: './src/index.ejs',
     }),
     new ExtractTextPlugin({
-      filename: "app.css",
+      filename: '[name]-[hash].css',
       disable: !isProduction
     }),
     new webpack.HotModuleReplacementPlugin(), // enable HMR globally
