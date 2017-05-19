@@ -22,10 +22,13 @@ const cssProd = ExtractTextPlugin.extract({
 const cssConfig = isProduction ? cssProd : cssDev
 
 module.exports = {
-  entry: './src/app.js',
+  entry: {
+    main: './src/app.js',
+    vendor: ['react', 'react-dom']
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: isProduction ? '[name]-[hash].bundle.min.js' : '[name].bundle.js'
+    filename: isProduction ? '[name].[chunkhash].js' : '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
@@ -84,8 +87,12 @@ module.exports = {
       filename: '[name]-[contenthash].min.css',
       disable: !isProduction
     }),
-    new webpack.HotModuleReplacementPlugin(), // enable HMR globally
-    new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'manifest']
+    }),
+    // new webpack.HotModuleReplacementPlugin(), // enable HMR globally
+    // new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
+    new webpack.HashedModuleIdsPlugin()
   ],
   devtool: isProduction ? "cheap-module-source-map" : "eval-source-map"
 }
